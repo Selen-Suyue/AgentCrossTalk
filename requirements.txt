@@ -1,2 +1,2 @@
-google-generativeai>=0.2.0 
+google-generativeai
 time
