@@ -15,7 +15,7 @@ This project consists of three Python files:
 1. **Install required libraries:**
 
     ```bash
-    pip install -r requirements.txt
+    pip install -U google-generativeai 
     ```
 
 2. **Obtain the Google Gemini API key:**
