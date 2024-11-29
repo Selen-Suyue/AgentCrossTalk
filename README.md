@@ -20,7 +20,7 @@ This project consists of three Python files:
 
 2. **Obtain the Google Gemini API key:**
 
-    You need to register a Google Cloud account, enable the Gemini API, and obtain an API key. Refer to the official Google Cloud documentation for details: [https://cloud.google.com/generative-ai/docs/setup](https://cloud.google.com/generative-ai/docs/setup)
+    You need to register a Google account, enable the Gemini API, and obtain an API key. Refer to the official Google AI documentation for details: [Google aistudio api docs](https://aistudio.google.com/apikey)
 
 3. **Configure the API key:**
 
