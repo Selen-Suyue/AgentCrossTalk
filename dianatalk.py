@@ -48,7 +48,6 @@ while True:
         audio_path = result[1]
 
         if isinstance(audio_path, str):
-            # "C:\Users\18062089249\AppData\Local\Temp\gradio"
             print("Playing audio...")
             audio_path = os.path.normpath(audio_path)
             playsound(audio_path)
