@@ -15,6 +15,55 @@ engine.setProperty('rate', 237)
 # Volume (0.0 to 1.0)
 engine.setProperty('volume', 1)
 
+
+##########新增
+from tkinter import filedialog, messagebox
+from crosstalk import extract_topic_from_image, perform_crosstalk
+
+def upload_image():
+    # 弹出文件选择窗口，允许选择图片文件
+    file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg;*.bmp")])
+    if file_path:
+        try:
+            # 提取图像主题
+            topic = extract_topic_from_image(file_path)
+            if topic:
+                user_entry.delete(0, tk.END)
+                user_entry.insert(0, topic)  # 将识别到的主题填入输入框
+                messagebox.showinfo("主题提取成功", f"从图片中提取的主题: {topic}")
+            else:
+                messagebox.showwarning("未提取到主题", "无法从图片中提取主题，请重试。")
+        except Exception as e:
+            messagebox.showerror("图片处理失败", f"图片处理时出错: {e}")
+
+
+'''
+################新增2：语音
+import tkinter as tk
+from tkinter import filedialog, messagebox
+import speech_recognition as sr
+from crosstalk import perform_crosstalk
+
+def upload_audio():
+    # 弹出文件选择对话框，允许用户选择音频文件
+    file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.wav;*.mp3")])
+    if file_path:
+        try:
+            # 调用函数提取语音中的文本
+            topic = extract_topic_from_audio(file_path)
+            if topic:
+                user_entry.delete(0, tk.END)
+                user_entry.insert(0, topic)  # 将提取的文本填入输入框
+                messagebox.showinfo("主题提取成功", f"从语音中提取的主题: {topic}")
+            else:
+                messagebox.showwarning("未提取到主题", "无法从语音中提取主题，请重试。")
+        except Exception as e:
+            messagebox.showerror("语音处理失败", f"语音处理时出错: {e}")
+'''
+
+
+
+
 def append_message(speaker, message, tag=""):
     chat_area.config(state=tk.NORMAL)
     chat_area.insert(END, speaker + ": " + message + "\n", tag)
@@ -78,6 +127,13 @@ input_frame.pack(fill=tk.X, padx=20, pady=(10, 20))
 
 user_entry = ttk.Entry(input_frame)
 user_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+
+# 新增上传图片按钮
+upload_button = ttk.Button(input_frame, text="上传图片", command=upload_image)
+upload_button.pack(side=tk.RIGHT, padx=(0, 10))
+#新增上传语音按钮
+#audio_button = ttk.Button(input_frame, text="上传语音", command=upload_audio)
+#audio_button.pack(side=tk.RIGHT, padx=(0, 10))  # 添加到界面右侧
 
 start_button = ttk.Button(input_frame, text="Start Show", command=start_crosstalk)
 start_button.pack(side=tk.RIGHT)
