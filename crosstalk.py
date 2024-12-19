@@ -1,70 +1,65 @@
+import speech_recognition as sr
+
+from pydub import AudioSegment
 from config import dougen_model, penggen_model
-
-
-
-#####################新增1,图片
 from transformers import BlipProcessor, BlipForConditionalGeneration
 from PIL import Image
-def extract_topic_from_image(image_path):
+def extract_topic_from_image(image_path: str) -> str:
     """
-    使用图像分类模型提取图像内容标签，作为相声对话的主题
-    :param image_path: 图片文件路径
-    :return: 提取的主题（如动物、物体等）
+    Extracts the topic of the given image using an image classification model.
+
+    Args:
+        image_path (str): The path to the image file.
+
+    Returns:
+        str: The extracted topic (e.g. "animal", "object", etc.).
     """
     try:
-        # 加载BLIP模型和处理器（可以换成其他模型）
+        # Load the BLIP model and processor (can be replaced with other models)
         processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
         model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
-        # 打开图片
+        # Open the image
         image = Image.open(image_path)
 
-        # 处理图像并生成文本描述
+        # Process the image and generate a text description
         inputs = processor(images=image, return_tensors="pt")
         out = model.generate(**inputs)
         description = processor.decode(out[0], skip_special_tokens=True)
 
-        # 返回生成的主题（例如："a cat"）
+        # Return the generated topic (e.g. "a cat")
         return description.strip()
 
     except Exception as e:
-        return f"图片处理出错: {str(e)}"
+        return f"Error occurred while processing the image: {str(e)}"
 
 
+def extract_topic_from_audio(audio_path: str) -> str:
+    """Extract the topic of the given audio by converting it to text.
 
-#####################新增2：语音
+    Args:
+        audio_path (str): The path to the audio file.
 
-import speech_recognition as sr
-from pydub import AudioSegment
-
-
-def extract_topic_from_audio(audio_path):
-    """
-    将上传的音频文件转化为文本，作为对话的主题
-    :param audio_path: 音频文件路径
-    :return: 转化后的文本内容
+    Returns:
+        str: The extracted topic (e.g. " ", etc.).
     """
     recognizer = sr.Recognizer()
     try:
-        # 将非 WAV 格式的音频转换为 WAV 格式
+        # Convert non-WAV format audio to WAV format
         if not audio_path.endswith(".wav"):
             audio = AudioSegment.from_file(audio_path)
             audio_path = audio_path.replace(audio_path.split('.')[-1], 'wav')
             audio.export(audio_path, format="wav")
 
-        # 读取音频文件
+        # Read the audio file
         with sr.AudioFile(audio_path) as source:
             audio_data = recognizer.record(source)
 
-        # 使用 Google 的语音识别 API 识别语音内容
-        text = recognizer.recognize_google(audio_data, language="zh-CN")  # 中文识别
+        # Use the Google Speech Recognition API to recognize the audio content
+        text = recognizer.recognize_google(audio_data, language="zh-CN")  # Chinese recognition
         return text
     except Exception as e:
-        return f"语音处理出错: {str(e)}"
-
-
-
-
+        return f"Error occurred while processing the audio: {str(e)}"
 
 
 def perform_crosstalk(topic, append_message, max_length=50):
