@@ -1,4 +1,4 @@
-
+# AgentCrossTalk
 This project uses the Google Gemini to create a simple chatbot application simulating two crosstalk performers (Dougen and Penggen) performing based on user-provided topics with text,image (audio coming soon) input.
 
 ## Project Details
