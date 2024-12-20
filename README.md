@@ -9,9 +9,9 @@ This project consists of three Python files:
 - **`config.py`:** Contains API key and other configuration details.
 - **`crosstalk_utils.py:`** The ultis helps **Blip Model** extract topic from image as well as audio assistance.
 - **`dianatalk.py:`** A sample for vtuber talk. You can try to interact with diana.
--**`tts_speech.py:`** For standard audio output.
--**`ui_elements.py`** For UI windows embark design.
--**`Vtuber_speech.py:`** Implement for vtuber audio. You can change with your preferd vtuber on huggingface through [link](https://huggingface.co/spaces/XzJosh/Diana-Bert-VITS2).
+- **`tts_speech.py:`** For standard audio output.
+- **`ui_elements.py`** For UI windows embark design.
+- **`Vtuber_speech.py:`** Implement for vtuber audio. You can change with your preferd vtuber on huggingface through [link](https://huggingface.co/spaces/XzJosh/Diana-Bert-VITS2).
 
 ## How to Run
 
