@@ -27,7 +27,7 @@ def append_message(speaker, message, tag=""):
     chat_area.yview(END)
     root.update()
     time.sleep(0.2)
-    if special_voice_var == True:
+    if special_voice_var.get() == True:
         if speaker == "逗哏":
             Lian(message)
         elif speaker == "捧哏":

@@ -73,8 +73,6 @@ def create_input_frame(main_frame, upload_image_command, start_crosstalk_command
     start_button.pack(side=tk.RIGHT)
 
     special_voice_var = tk.BooleanVar()
-    special_voice_label = ttk.Label(input_frame, text="特殊语音")
-    special_voice_label.pack(side=tk.LEFT, padx=(0, 10))
-    special_voice_checkbutton = ttk.Checkbutton(input_frame, text="", variable=special_voice_var)
+    special_voice_checkbutton = tk.Checkbutton(input_frame, text="Vtuber Voice", variable=special_voice_var)
     special_voice_checkbutton.pack(side=tk.LEFT, padx=(0, 10))
-    return input_frame, user_entry, upload_button, start_button, special_voice_var  # Return newly created widgets
+    return input_frame, user_entry, upload_button, start_button, special_voice_var  
