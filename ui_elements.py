@@ -12,7 +12,7 @@ def create_main_window():
 
 def create_chat_area(root):
     """Creates the chat area."""
-    modern_font = font.Font(family="Helvetica Neue", size=12)
+    modern_font = font.Font(family="FangSong", size=13)
     style = configure_style(modern_font)
     main_frame = ttk.Frame(root, style="TFrame")
     main_frame.pack(fill=tk.BOTH, expand=True)

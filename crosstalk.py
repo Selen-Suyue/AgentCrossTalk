@@ -43,9 +43,10 @@ def generate_dou_prompt(topic, i, previous_peng_text=None, max_length=50, discus
     prefix += f"这是第{i + 1}句{'台词' if discussion_context else '轮讨论'}，"
     if discussion_context:
         prefix += f"请根据前面讨论的内容，"
+    else :
+        prefix += f"你们现在需要讨论出来如何演绎这场相声，讨论阶段要正经严肃一些，不要抖包袱"
     prefix += f"你想说什么？请用不超过{max_length}个字表达。"
-    if discussion_context:
-        prefix += f"\n讨论内容回顾：\n{discussion_context}"
+    prefix += f"\n讨论内容回顾：\n{discussion_context}"
     return prefix
 
 
@@ -53,10 +54,10 @@ def generate_peng_prompt(topic, previous_dou_text, i, max_length=50, discussion_
     prefix = f"你是一个相声演员中的捧哏，你的逗哏搭档说了“{previous_dou_text}”，"
     if discussion_context:
       prefix += f"请根据前面讨论的内容和逗哏的台词，"
+    else :
+        prefix += f"你们现在需要讨论出来如何演绎这场相声，讨论阶段要正经严肃一些，不要抖包袱"
     prefix += f"这是第{i+1}句{'台词' if discussion_context else '轮讨论'}，你想回应什么？请用不超过{max_length}个字表达。"
-
-    if discussion_context:
-        prefix += f"\n讨论内容回顾：\n{discussion_context}"
+    prefix += f"\n讨论内容回顾：\n{discussion_context}"
 
     return prefix
 
